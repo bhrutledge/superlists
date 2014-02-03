@@ -1,24 +1,33 @@
 from fabric.contrib.files import append, exists
-from fabric.api import env, local, run, cd, task, prefix
+from fabric.api import env, local, run, cd, task, prefix, warn_only, quiet
 import random
 
-@task
-def deploy(app_name, app_port):
-    # Assume project and static apps are set up
-    # Assume virtualenvwrapper works on login
-    # TODO: Get app_port from WebFaction API
+env.project_pkg = 'superlists'
+env.repo_url = 'https://github.com/bhrutledge/superlists.git'
 
-    env.project_pkg = 'superlists'
-    env.repo_url = 'https://github.com/bhrutledge/superlists.git'
+@task
+def staging():
+    env.hosts = ['debugged.org']
+    env.user = 'rutt'
+    env.app_name = 'superlists_staging'
+    env.app_port = '27916'
+    env.app_url = 'superlists-staging.bhrutledge.com'
+    env.python = '/usr/local/bin/python3.3'
+
+    init_env()
+
+def init_env():
     env.user_dir = '/home/%(user)s' % env
-    env.app_name = app_name
-    env.app_port = app_port
     env.project_dir = '%(user_dir)s/webapps/%(app_name)s' % env
     env.static_dir = '%(user_dir)s/webapps/%(app_name)s_static' % env
     env.workon = 'workon %(app_name)s' % env
     env.wsgi_app = '%(project_pkg)s.wsgi:application' % env
     env.pid_path = '%(project_dir)s/gunicorn.pid' % env
-    env.python = '/usr/local/bin/python3.3'
+
+@task
+def deploy():
+    # Assume project and static apps are set up
+    # Assume virtualenvwrapper works on login
 
     mkvirtualenv()
     git_reset()
@@ -54,7 +63,7 @@ def local_settings():
             return
 
         append(settings_path, 'from .common import *')
-        append(settings_path, 'ALLOWED_HOSTS = ["%(host)s"]' % env)
+        append(settings_path, 'ALLOWED_HOSTS = ["%(app_url)s"]' % env)
         append(settings_path, 'STATIC_ROOT = "%(static_dir)s"' % env)
 
         chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
@@ -69,17 +78,21 @@ def syncdb():
     with prefix(env.workon):
         run('./manage.py syncdb --noinput')
 
-# TODO: Make these standalone tasks, must initialize env
-
+@task
 def start():
     with prefix(env.workon):
         run('gunicorn -D -b 127.0.0.1:%(app_port)s -p %(pid_path)s %(wsgi_app)s'
             % env)
 
+@task
 def stop():
-    run('kill $(cat %(pid_path)s)' % env)
-    run('rm %(pid_path)s' % env)
+    with warn_only():
+        run('kill $(cat %(pid_path)s)' % env)
 
+    with quiet():
+        run('rm %(pid_path)s' % env)
+
+@task
 def restart():
     try:
         run('kill -HUP $(cat %(pid_path)s)' % env)
