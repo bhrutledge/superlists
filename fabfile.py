@@ -2,8 +2,9 @@ from fabric.contrib.files import append, exists
 from fabric.api import env, local, run, cd, task, prefix, warn_only, quiet
 import random
 
-env.project_pkg = 'superlists'
 env.repo_url = 'https://github.com/bhrutledge/superlists.git'
+env.project_pkg = 'superlists'
+env.project_apps = ['lists']
 
 @task
 def staging():
@@ -98,4 +99,13 @@ def restart():
         run('kill -HUP $(cat %(pid_path)s)' % env)
     except:
         start()
+
+@task
+def unittest():
+    with prefix(env.workon):
+        run('./manage.py test ' + ' '.join(env.project_apps))
+
+@task
+def functest():
+    local('./manage.py test %(project_pkg)s --liveserver=%(app_url)s' % env)
 
