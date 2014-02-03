@@ -1,4 +1,5 @@
 __pycache__
 *.pyc
 db.sqlite3
+gunicorn.pid
 superlists/settings/local.py
