@@ -1,8 +1,10 @@
 from django.db import models
+from django.shortcuts import resolve_url
 
 
 class List(models.Model):
-    pass
+    def get_absolute_url(self):
+        return resolve_url('view_list', self.id)
 
 
 class Item(models.Model):
@@ -12,3 +14,4 @@ class Item(models.Model):
     def save(self, *args, **kwargs):
         self.full_clean()
         super().save(*args, **kwargs)
+
