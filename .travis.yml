@@ -6,4 +6,4 @@ install:
 script: python manage.py test
 env:
   global:
-    - SECRET_KEY="z1g&exep*bl(+yi5^wa*(09jif#l&)(m8j&e4q*gchr$0qv!l+"
+    - secure: "dU2te53n6/7nq3oBFSqQu+k1Rh5TCDrCYCP+Jm07gv+t9NorOhtf95G/OUbmWvR7cilny6yFsNbgdptfvJcEjcAXwYHo3353KdCwqI21OWPFu6+COvxQQjrd+gqwtLadwtG8VioZneqHrKpFVWmWwlu8F9jjperjYFdQ7BZ74iQ="
