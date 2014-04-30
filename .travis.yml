@@ -3,7 +3,8 @@ python:
 - '3.3'
 install:
 - pip install -r requirements.txt
-script: python manage.py test
+# TODO: Selenium functional tests
+script: python manage.py test lists
 env:
   global:
     - secure: "fX9l/W4jJ/l/VuWhzUi6Q15xBH7EWjJ+RhqQoBcopSYr/To8OI/lVBJv0SL95D6dbzw4uT/vlkDs9+EnH5mZpXnn9ZjkdYruT/cQhob2g6uQZY7cIIU+Id7w7UyTfXxPOZQ4e5olWQMD7CSpDSvtX7Fzk3tB8zdpRnXcz+ZeMZc="
