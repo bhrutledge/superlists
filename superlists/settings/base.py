@@ -63,3 +63,6 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+SECRET_KEY = os.environ['SECRET_KEY']
+
