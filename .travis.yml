@@ -6,4 +6,4 @@ install:
 script: python manage.py test
 env:
   global:
-    - secure: "dU2te53n6/7nq3oBFSqQu+k1Rh5TCDrCYCP+Jm07gv+t9NorOhtf95G/OUbmWvR7cilny6yFsNbgdptfvJcEjcAXwYHo3353KdCwqI21OWPFu6+COvxQQjrd+gqwtLadwtG8VioZneqHrKpFVWmWwlu8F9jjperjYFdQ7BZ74iQ="
+    - secure: "fX9l/W4jJ/l/VuWhzUi6Q15xBH7EWjJ+RhqQoBcopSYr/To8OI/lVBJv0SL95D6dbzw4uT/vlkDs9+EnH5mZpXnn9ZjkdYruT/cQhob2g6uQZY7cIIU+Id7w7UyTfXxPOZQ4e5olWQMD7CSpDSvtX7Fzk3tB8zdpRnXcz+ZeMZc="
