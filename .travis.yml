@@ -1,8 +1,9 @@
 language: python
 python:
-  - "3.3"
-# command to install dependencies
+- '3.3'
 install:
-  - "pip install -r requirements.txt"
-# command to run tests
-script: "python manage.py test"
+- pip install -r requirements.txt
+script: python manage.py test
+env:
+  global:
+    secure: gBCEARX+3UpDmtyJGJ41Dd0ZSyUQXEThAqH8UyfVrRksIT3dn/y0zd9NQ9q4W3ndCe9uLdwl1o9+Y7uA7udYtdfKZPnH39Vqxgr64gKVuR/IdqcF1O8qU/MOUJqVbH1mX/8tFLhW0PNFNO1GwlWDJBuKOh+DO9UZZ2z8ZlfGtPY=
