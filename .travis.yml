@@ -5,6 +5,7 @@ python:
 
 env:
   global:
+    - DJANGO_SETTINGS_MODULE=superlists.settings.base
     - secure: "fX9l/W4jJ/l/VuWhzUi6Q15xBH7EWjJ+RhqQoBcopSYr/To8OI/lVBJv0SL95D6dbzw4uT/vlkDs9+EnH5mZpXnn9ZjkdYruT/cQhob2g6uQZY7cIIU+Id7w7UyTfXxPOZQ4e5olWQMD7CSpDSvtX7Fzk3tB8zdpRnXcz+ZeMZc="
 
 before_install:
