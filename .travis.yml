@@ -1,9 +1,20 @@
 language: python
+
 python:
-- '3.3'
-install:
-- pip install -r requirements.txt
-script: python manage.py test
+  - '3.3'
+
 env:
   global:
-    secure: gBCEARX+3UpDmtyJGJ41Dd0ZSyUQXEThAqH8UyfVrRksIT3dn/y0zd9NQ9q4W3ndCe9uLdwl1o9+Y7uA7udYtdfKZPnH39Vqxgr64gKVuR/IdqcF1O8qU/MOUJqVbH1mX/8tFLhW0PNFNO1GwlWDJBuKOh+DO9UZZ2z8ZlfGtPY=
+    - secure: "fX9l/W4jJ/l/VuWhzUi6Q15xBH7EWjJ+RhqQoBcopSYr/To8OI/lVBJv0SL95D6dbzw4uT/vlkDs9+EnH5mZpXnn9ZjkdYruT/cQhob2g6uQZY7cIIU+Id7w7UyTfXxPOZQ4e5olWQMD7CSpDSvtX7Fzk3tB8zdpRnXcz+ZeMZc="
+
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+
+install:
+  - pip install -r requirements.txt
+
+
+script:
+  - python manage.py test
+
